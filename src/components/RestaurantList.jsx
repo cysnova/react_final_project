@@ -14,30 +14,30 @@ const RestaurantList = () => {
   const dispatch = useDispatch();
   const restaurants = useSelector((state) => state.restaurants.data);
 
-
-  console.log(restaurants)
   const handleDelete = (restaurant) => {
     dispatch(removeRestaurant(restaurant.id));
   };
 
-  
   const handleEdit = (restaurant) => {
-    dispatch(editRestaurant({
-      id: restaurant.id,
-      name: restaurant.name, // Provide the updated name
-      location: restaurant.location, // Provide the updated location
-      rating: restaurant.rating, // Provide the updated rating
-    }));
+    dispatch(
+      editRestaurant({
+        id: restaurant.id,
+        name: restaurant.name,
+        location: restaurant.location,
+        rating: restaurant.rating,
+      })
+    );
     dispatch(openModal());
   };
-  
 
   const renderedRestaurants = restaurants.map((restaurant) => {
     return (
       <tr key={restaurant.id}>
         <td>{restaurant.name}</td>
         <td>{restaurant.location}</td>
-        <td>{restaurant.rating } <AiOutlineStar/></td>
+        <td>
+          {restaurant.rating} <AiOutlineStar />
+        </td>
         <td>
           <GrEdit onClick={() => handleEdit(restaurant)} />
           <RiDeleteBin6Line onClick={() => handleDelete(restaurant)} />
@@ -47,8 +47,8 @@ const RestaurantList = () => {
   });
 
   return (
-   
-      <Table hover size="sm" striped responsive>
+    <Table hover size="sm" striped responsive>
+      {restaurants.length > 0 && (
         <thead>
           <tr>
             <th>Name</th>
@@ -57,10 +57,10 @@ const RestaurantList = () => {
             <th>Edit/Delete</th>
           </tr>
         </thead>
-        <tbody>{renderedRestaurants}</tbody>
-      </Table>
-    
+      )}
+      <tbody>{renderedRestaurants}</tbody>
+    </Table>
   );
 };
 
-export default RestaurantList
+export default RestaurantList               
