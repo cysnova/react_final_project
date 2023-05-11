@@ -9,7 +9,7 @@ import '../buttonStyle.css'
 
 const RestaurantForm = () => {
   const dispatch = useDispatch();
-  const [isEditing, setIsEditing] = useState(false); 
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
 
 
@@ -60,7 +60,8 @@ const RestaurantForm = () => {
     e.preventDefault();
 
     dispatch(addRestaurant({ name, location, rating }));
-    dispatch(handleCloseModal());
+    setFormSubmitted(true);
+    handleCloseModal();
   
 }
 
@@ -69,10 +70,20 @@ const RestaurantForm = () => {
   
   return (
     <div>
-      <button onClick={handleOpenModal} className='button-85'>Add Restaurant</button> 
-                       
+      {!formSubmitted ?(
+        <div  style={{ display: 'flex', justifyContent: 'center' ,alignItems:'center',height:'100vh'}}>
+        
+          <button onClick={handleOpenModal} className='button-85'>Add Restaurant</button> 
+        </div>
+        ):(
+          <div className="text-start m-4">
+            <button onClick={handleOpenModal} class="btn btn-outline-secondary">Add Restaurant</button> 
+        </div>
+      )}
 
-      <Modal centered isOpen={showModal} toggle={handleCloseModal}>
+
+      {!formSubmitted && (
+     <Modal centered isOpen={showModal} toggle={handleCloseModal}>
         <ModalHeader>
           <BiRestaurant fontSize="2em"/>
         </ModalHeader>
@@ -117,11 +128,12 @@ const RestaurantForm = () => {
           </Form>
         </ModalBody>
       </Modal>
+      )}
     </div>
   );
 };
 
-export default RestaurantForm;
+export default RestaurantForm;            
 
 
   

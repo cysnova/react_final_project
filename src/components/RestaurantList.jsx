@@ -26,7 +26,10 @@ const RestaurantList = () => {
         location: restaurant.location,
         rating: restaurant.rating,
       })
+
     );
+    
+
     dispatch(openModal());
   };
 
