@@ -13,8 +13,8 @@ const RestaurantSearch = () => {
   };
   return (
     <div>
-       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="find the name of the restaurant" aria-label="Search"
+       <form className="d-flex">
+        <input className="form-control me-2" type="search" placeholder="find the name of the restaurant" aria-label="Search"
         value = {searchTerm}
         onChange ={handleSearchTermChange}
         />

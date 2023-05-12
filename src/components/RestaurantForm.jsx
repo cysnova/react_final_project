@@ -35,7 +35,7 @@ const RestaurantForm = ({restaurantToEdit}) => {
     dispatch(changeName('')); 
     dispatch(changeLocation('')); 
     dispatch(changeRating('')); 
-    setIsEditing(false);
+    
   };
 
   const handleNameChange = (e) => {
@@ -80,7 +80,7 @@ const RestaurantForm = ({restaurantToEdit}) => {
         </div>
         ):(
           <div className="text-start m-4">
-            <button onClick={handleOpenModal} class="btn btn-outline-secondary">Add Restaurant</button> 
+            <button onClick={handleOpenModal} className="btn btn-outline-secondary">Add Restaurant</button> 
         </div>
       )}
 
