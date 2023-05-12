@@ -29,17 +29,16 @@ const restaurantsSlice = createSlice({
         },
         editRestaurant: (state, action) => {
             const { id, name, location, rating } = action.payload;
-            const index = state.data.findIndex((restaurant) => restaurant.id === id);
+            return {
+              ...state,
+              data: state.data.map((restaurant) =>
+                restaurant.id === id ? { ...restaurant, name, location, rating } : restaurant
+              ),
+            };
+          },
           
-            if (index !== -1) {
-              state.data[index] = {
-                ...state.data[index],
-                name,
-                location,
-                rating,
-              };
-            }
-          }
+          
+          
                   
     },
 });

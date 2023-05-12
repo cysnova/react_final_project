@@ -2,12 +2,11 @@ import React,{useState} from 'react';
 import { Modal, ModalBody, ModalHeader, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {BiRestaurant} from 'react-icons/bi';
 import {useDispatch, useSelector} from 'react-redux';
-import {openModal, closeModal, changeLocation, changeName, changeRating, editRestaurant} from '../store';
-import { addRestaurant } from '../store/slice/restaurantsSlice'
+import {openModal, closeModal, changeLocation, changeName, changeRating, editRestaurant, addRestaurant} from '../store';
 import '../buttonStyle.css'
 
 
-const RestaurantForm = () => {
+const RestaurantForm = ({restaurantToEdit}) => {
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -58,13 +57,17 @@ const RestaurantForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(addRestaurant({ name, location, rating }));
+  
+    if (restaurantToEdit) {
+      dispatch(editRestaurant({ id: restaurantToEdit.id, name, location, rating }));
+    } else {
+      dispatch(addRestaurant({ name, location, rating }));
+    }
+  
     setFormSubmitted(true);
     handleCloseModal();
+  };
   
-}
-
 
 
   
@@ -72,7 +75,7 @@ const RestaurantForm = () => {
     <div>
       {!formSubmitted ?(
         <div  style={{ display: 'flex', justifyContent: 'center' ,alignItems:'center',height:'100vh'}}>
-        
+    
           <button onClick={handleOpenModal} className='button-85'>Add Restaurant</button> 
         </div>
         ):(
@@ -81,8 +84,6 @@ const RestaurantForm = () => {
         </div>
       )}
 
-
-      {!formSubmitted && (
      <Modal centered isOpen={showModal} toggle={handleCloseModal}>
         <ModalHeader>
           <BiRestaurant fontSize="2em"/>
@@ -128,10 +129,9 @@ const RestaurantForm = () => {
           </Form>
         </ModalBody>
       </Modal>
-      )}
     </div>
   );
-};
+};                  
 
 export default RestaurantForm;            
 
