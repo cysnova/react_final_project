@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React  from 'react'
 import {Table} from 'reactstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import { removeRestaurant, editRestaurant} from '../store'
@@ -10,7 +10,13 @@ import { openModal } from '../store';
 
 const RestaurantList = () => {
   const dispatch = useDispatch();
-  const restaurants = useSelector((state) => state.restaurants.data);
+  const  {restaurants,name} = useSelector(({form, restaurants:{data,searchTerm}})=>{
+    const filteredRestaurants = data.filter((restaurant)=>restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    return {
+      restaurants:filteredRestaurants,
+      name:form.name,
+    };
+  });
   const restaurantToEdit = useSelector((state) => state.restaurants.restaurantToEdit);
 
   const handleDelete = (restaurant) => {
@@ -23,6 +29,7 @@ const RestaurantList = () => {
   };
 
   const renderedRestaurants = restaurants.map((restaurant) => {
+    
     return (
       <tr key={restaurant.id}>
         <td>{restaurant.name}</td>
