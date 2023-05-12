@@ -38,8 +38,8 @@ const RestaurantList = () => {
           {restaurant.rating} <AiOutlineStar />
         </td>
         <td>
-          <GrEdit onClick={() => handleEdit(restaurant)} />
-          <RiDeleteBin6Line onClick={() => handleDelete(restaurant)} />
+          <GrEdit style={{ marginRight: '10px', fontSize: '1.2rem' }} onClick={() => handleEdit(restaurant)} />
+          <RiDeleteBin6Line style={{ fontSize: '1.2rem' }} onClick={() => handleDelete(restaurant)} />
         </td>
       </tr>
     );
@@ -53,7 +53,7 @@ const RestaurantList = () => {
             <th>Name</th>
             <th>Location</th>
             <th>Rating  <AiOutlineStar/></th>
-            <th>Edit/Delete</th>
+            <th>Edit / Delete</th>
           </tr>
         </thead>
       )}
